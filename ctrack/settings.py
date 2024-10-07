@@ -23,10 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4y=sydmh)kb#lqyanw-x36prbj)(($a)zhpuk(%dym=1njd83-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '*.vercel.app',
+    'ctracweb.vercel.app'
+    'ctrac-c30fznfnw-pgwizs-projects.vercel.app',
+    'ctracweb-pgwizs-projects.vercel.app'
     # Add other allowed hosts here, if needed
 ]
 
