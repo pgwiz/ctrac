@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
     # Add other allowed hosts here, if needed
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR / "car_tracker_app/templates/src")
 # Application definition
 STATICFILES_DIRS = [
     BASE_DIR / "car_tracker_app/templates/src",
