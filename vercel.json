@@ -12,17 +12,16 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "ctrack/wsgi.py"
-    },
-    {
       "src": "/static/(.*)",
       "dest": "staticfiles/$1"
     },
     {
-      "handle": "error",
       "src": "/(.*)",
       "dest": "ctrack/wsgi.py"
+    },
+    {
+      "handle": "filesystem",
+      "src": "/404.html"
     }
   ]
 }
