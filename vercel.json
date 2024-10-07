@@ -17,7 +17,8 @@
     },
     {
       "src": "/static/(.*)",
-      "dest": "staticfiles/$1"
-    }
+      "dest": "car_tracker_app/templates/src/$1"
+    },
+   
   ]
 }
