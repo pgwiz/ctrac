@@ -18,11 +18,6 @@
     {
       "src": "/static/(.*)",
       "dest": "staticfiles/$1"
-    },
-    {
-      "handle": "error",
-      "src": "/(.*)",
-      "dest": "ctrack/wsgi.py"
     }
   ]
 }
