@@ -4,14 +4,23 @@
       "src": "ctrack/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
+    },
+    {
+      "src": "car_tracker_app/templates/src/*",
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "ctrack/wsgi.py"
+    },
     {
       "src": "/static/(.*)",
       "dest": "staticfiles/$1"
     },
     {
+      "handle": "error",
       "src": "/(.*)",
       "dest": "ctrack/wsgi.py"
     }
