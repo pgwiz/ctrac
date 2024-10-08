@@ -1,5 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
+from ctrack import settings
 from . import views
+from django.views import static
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -16,3 +19,9 @@ urlpatterns = [
     # other URL patterns
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT, 'show_indexes':True}),
+        re_path(r'^media/(?P<path>.*)$', views.static.serve, {'document_root': settings.MEDIA_ROOT, 'show_indexes':True}),
+    ]

@@ -27,19 +27,20 @@ SECRET_KEY = 'django-insecure-4y=sydmh)kb#lqyanw-x36prbj)(($a)zhpuk(%dym=1njd83-
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
     '*.vercel.app',
     'ctracweb.vercel.app',
     'ctrac-c30fznfnw-pgwizs-projects.vercel.app',
     'ctracweb-pgwizs-projects.vercel.app'
     # Add other allowed hosts here, if needed
 ]
-
-STATIC_ROOT = os.path.join(BASE_DIR / "car_tracker_app/templates/src")
-# Application definition
+MEDIA_ROOT = os.path.join(BASE_DIR, 'car_tracker_app', 'media')
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / "car_tracker_app/templates/src",
 ]
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
