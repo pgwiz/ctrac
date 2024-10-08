@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 from ctrack import settings
 from . import views
-from django.views import static
+from django.conf.urls.static import static
 
 
 urlpatterns = [
