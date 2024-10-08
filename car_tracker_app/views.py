@@ -19,20 +19,20 @@ def vehicle_detail(request, vehicle_id):
     }
     return JsonResponse(vehicle_data)
 
-@login_required
+
 def delete_vehicle(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, id=vehicle_id)
     vehicle.delete()
     messages.success(request, f'Vehicle {vehicle.model} has been deleted successfully')
     return redirect('manage_vehicles')
 
-@login_required
+
 def manage_vehicles(request):
     vehicles = Vehicle.objects.filter(
         phone_no=request.user.userprofile.phone_no  # Access phone_no through UserProfile
     )
     return render(request, 'manage_vehicles.html', {'vehicles': vehicles})
-@login_required
+
 def edit_vehicle(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, id=vehicle_id)
     if request.method == 'POST':
@@ -45,7 +45,7 @@ def edit_vehicle(request, vehicle_id):
         form = VehicleRegistrationForm(instance=vehicle)
     return render(request, 'register_vehicle.html', {'form': form})
     
-@login_required
+
 def register_vehicle(request):
     if request.method == 'POST':
         form = VehicleRegistrationForm(request.POST)
@@ -69,7 +69,7 @@ def register_vehicle(request):
 def index(request):
     return render(request, 'index.html')
 
-@login_required
+
 def track(request):
     vehicles = Vehicle.objects.all()  # Fetch all vehicles from the database
     return render(request, 'track.html', {'vehicles': vehicles})
