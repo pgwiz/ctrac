@@ -4,6 +4,10 @@ from .forms import VehicleRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from .forms import RegistrationForm
+from .forms import UserForm
 
 def vehicle_detail(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, id=vehicle_id)
@@ -97,3 +101,43 @@ def login(request):
 
 def docu(request):
     return render(request, 'documentation.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('manage_vehicles')
+    return render(request, 'login.html')
+
+def manage_users_view(request):
+    users = User.objects.all()
+    return render(request, 'manage_users.html', {'users': users})
+
+def delete_user_view(request, pk):
+    user = User.objects.get(pk=pk)
+    user.delete()
+    return redirect('manage_users')
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = form.save()
+            request.user = user
+            return redirect('index')
+    else:
+        form = RegistrationForm()
+    return render(request, 'register.html', {'form': form})
+
+def edit_user_view(request, pk):
+    user = User.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()

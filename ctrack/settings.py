@@ -35,9 +35,14 @@ ALLOWED_HOSTS = [
     'ctracweb-pgwizs-projects.vercel.app'
     # Add other allowed hosts here, if needed
 ]
+LOGIN_URL = 'login'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'car_tracker_app', 'media')
+
 MEDIA_URL = '/media/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     BASE_DIR / "car_tracker_app/templates/src",
 ]
@@ -73,7 +78,7 @@ ROOT_URLCONF = 'ctrack.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,10 +97,28 @@ WSGI_APPLICATION = 'ctrack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+#brinpeter6-db-server
+#dbos_user
+#MC45MzUxNDIyOTAzNzAyODc3
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'defaultdb',
+        'USER': 'avnadmin',
+        'PASSWORD': 'AVNS_-OUrX1BfTIjgrk3NjrJ',
+        'HOST': 'ctrack-brinpeter6-8d6c.h.aivencloud.com',
+        'PORT': '14757',
+        'OPTIONS': {
+            'sslmode': 'require',
+            'sslrootcert': 'ctrack/ca.pem',
+        }
     }
 }
 

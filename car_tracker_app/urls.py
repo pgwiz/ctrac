@@ -15,6 +15,9 @@ urlpatterns = [
     path('docu/', views.docu, name='docu'),
     path('api/vehicle/<int:vehicle_id>/', views.vehicle_detail, name='vehicle_detail'),
     path('track_vehicle/<int:vehicle_id>/', views.track_vehicle, name='track_vehicle'),
+    path('register/', views.register_view, name='register'),
+    path('manage_users/', views.manage_users_view, name='manage_users'),
+    path('delete_user/<pk>/', views.delete_user_view, name='delete_user'),
 
     # other URL patterns
 
