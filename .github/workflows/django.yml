@@ -25,6 +25,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Fix Import Order
+      run: |
+        pip install isort
+        isort .
+        isort --recursive --init .
     - name: Prepare Environment
       run: |
         python manage.py collectstatic --no-input
