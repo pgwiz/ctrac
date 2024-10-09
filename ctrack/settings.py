@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    '*.vercel.app',
+    '.vercel.app',
     'ctracweb.vercel.app',
     'ctrac-c30fznfnw-pgwizs-projects.vercel.app',
     'ctracweb-pgwizs-projects.vercel.app'
