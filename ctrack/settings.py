@@ -44,8 +44,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    BASE_DIR / "car_tracker_app/templates/src",
-   'car_tracker_app/templates/src',
+    os.path.join(BASE_DIR , "car_tracker_app", "static"),
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
