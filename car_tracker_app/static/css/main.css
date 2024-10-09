@@ -1,0 +1,129 @@
+body{
+    background-color: rgb(0, 0, 0);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+ div.bodyCo{
+    color: white;
+ }
+.navbar-brand h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .navbar-nav li {
+    margin-right: 20px;
+  }
+  
+  .navbar-nav a {
+    font-size: 18px;
+    color: #337ab7;
+  }
+  
+  .navbar-nav a:hover {
+    color: #23527c;
+  }
+  .rcb2{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  }
+  .round-c-2btns{
+    text-align: center;
+    border-radius: 9px;
+
+  }
+
+  nav li a .nav-link :hover{
+    font-size: large;
+    /*border: #fff 2px 0px;
+    border-top: 2px;
+    border-bottom: 2px;*/
+
+  }
+
+  /* In your main.css or a separate CSS file */
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+}
+
+/* Slide-in animations */
+.slide-in-from-left {
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide-in-from-left.show {
+  transform: translateX(0);
+}
+
+.slide-in-from-right {
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide-in-from-right.show {
+  transform: translateX(0);
+}
+
+/* Additional animations (you can use these or others from Animate.css) */
+.animate__animated.animate__fadeInUp {
+  --animate-duration: 1s;
+}
+
+.animate__animated.animate__zoomIn {
+  --animate-duration: 0.5s;
+}
+
+.cen_align{
+  text-align: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Style the hr tag */
+hr {
+  border: none; 
+  height: 3px; 
+  background-color: white;
+  margin: 20px auto; 
+  width: 10%; /* Set initial width to a small value */
+  transition: width 0.5s ease-in-out; 
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+  opacity: 0.2; /* Initially hide the hr */
+}
+
+hr.show {
+  width: 80%; 
+  opacity: 1; /* Make it visible when the 'show' class is added */
+}
+
+.animate__animated.hr {
+  --animate-duration: 1s;
+}
+
+.animate__animated.hr.show {
+  animation-name: animate__fadeIn; /* Example animation from Animate.css */
+}
+.container {
+  overflow-y: hidden; /* Hide horizontal overflow */
+}
+
+/* Media query for screens smaller than or equal to 1024x640 */
+@media (max-width: 1024px) and (max-height: 640px) {
+  .navbar {
+    position: fixed; /* Fix the navbar to the bottom */
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    /* Add any additional styling changes you want for the smaller navbar here */
+  }
+}

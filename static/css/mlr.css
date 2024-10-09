@@ -1,0 +1,44 @@
+body {
+    background-color: #000; /* black background */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 300px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff; /* white background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+    text-align: center;
+}
+
+.login-form h2 {
+    color: #03A9F4; /* blue color */
+    margin-bottom: 20px;
+}
+
+.login-form input[type="text"], .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form button[type="submit"] {
+    background-color: rgb(218, 105, 30); /* orange color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: rgba(218, 105, 30, 0.8); /* orange color with 80% opacity */
+}
