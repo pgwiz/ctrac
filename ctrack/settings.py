@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     '.vercel.app',
     'ctracweb.vercel.app',
     'ctrac-c30fznfnw-pgwizs-projects.vercel.app',
-    'ctracweb-pgwizs-projects.vercel.app'
+    'ctracweb-pgwizs-projects.vercel.app',
     # Add other allowed hosts here, if needed
 ]
 LOGIN_URL = 'login'
