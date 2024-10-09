@@ -6,10 +6,8 @@
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
     },
     {
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "staticfiles_build"
-      }
+      "src": "car_tracker_app/templates/src/*",
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
@@ -19,7 +17,7 @@
     },
     {
       "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "dest": "car_tracker_app/templates/src/$1"
     }
   ]
 }
