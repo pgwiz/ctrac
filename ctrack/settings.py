@@ -35,8 +35,8 @@ ALLOWED_HOSTS = [
     'ctracweb.vercel.app',
     'ctrac-c30fznfnw-pgwizs-projects.vercel.app',
     'ctracweb-pgwizs-projects.vercel.app',
-    # Add other allowed hosts here, if needed
 ]
+
 LOGIN_URL = 'login'
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'car_tracker_app', 'media')
