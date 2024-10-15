@@ -1,0 +1,9 @@
+#how to delete data
+#login to shell
+>>python manage.py shell
+#then
+>>from car_tracker_app.models import Vehicle
+>>Vehicle.objects.all().delete()
+#or
+>>Vehicle.objects.filter(owner_name='John Doe').delete()
+
