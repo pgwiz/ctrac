@@ -39,13 +39,13 @@ ALLOWED_HOSTS = [
 
 LOGIN_URL = 'login'
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'car_tracker_app', 'media')
-# MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'car_tracker_app', 'media')
+MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'  # It's good practice to start with a leading slash
 STATICFILES_DIRS = [
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')  # No comma here
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')  # No comma here
 
 INSTALLED_APPS = [
     'django.contrib.admin',
