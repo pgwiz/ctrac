@@ -44,7 +44,6 @@ LOGIN_URL = 'login'
 
 STATIC_URL = '/static/'  # It's good practice to start with a leading slash
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')  # No comma here
 
