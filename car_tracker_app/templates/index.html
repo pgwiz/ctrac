@@ -7,10 +7,10 @@
     <!--link rel="stylesheet" href="src/css/bootstrap.css">
     <link rel="stylesheet" href="src/css/main.css"-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="src/css/bootstrap.css">
-    <link rel="stylesheet" href="src/css/main.css">
-    <script src="src/js/bootstrap.bundle.min.js"></script>
-    <script src="src/js/main.js"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
     <!--img src="{% static 'img/my-image.jpg' %}" alt="My Image"-->
     
     
@@ -68,7 +68,7 @@
           <p>Track, Monitor, and Control Vehicle Speed in Real-Time</p>
 
           <div class="rcb2">
-          <img src="src/img/truc_save_lifes.jpg" alt="Background Image" width="50%" height="50%" class="img-fluid round-c-2btns">
+          <img src="{% static 'img/truc_save_lifes.jpg' %}" alt="Background Image" width="50%" height="50%" class="img-fluid round-c-2btns">
 
           <div class="btn-group" role="group" aria-label="Basic radio toggle btton group">
             <button class="btn btn-outline-primary" onclick="window.location.href='#lnmr'">Learn more</button>
@@ -121,7 +121,7 @@
           </ul>
         </div>
         <div class="col-md-4 animate__animated"> 
-          <img src="src/img/ou-sol.jpg" alt="Image Description" class="img-fluid round-c-2btns"> 
+          <img src="{% static 'img/ou-sol.jpg' %}" alt="Image Description" class="img-fluid round-c-2btns"> 
         </div>
       </div>
       <hr style="color:white">
@@ -133,7 +133,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 d-flex flex-column fade-in animate__animated"> 
-          <img src="src/img/da-over.jpg" alt="Image Description" class="img-fluid round-c-2btns animate__animated"> 
+          <img src="{% static 'img/da-over.jpg' %}" alt="Image Description" class="img-fluid round-c-2btns animate__animated"> 
         </div>
         <div class="col-md-6 d-flex flex-column slide-in-from-left animate__animated"> 
           <h2 class="animate__animated">The Dangers of Overspeeding</h2>
@@ -166,7 +166,7 @@
         </ul>
       </div>
       <div class="col-md-4 d-flex flex-column slide-in-from-right animate__animated">
-        <img src="src/img/da-ben.jpg" alt="Image Description" class="img-fluid round-c-2btns animate__animated"> 
+        <img src="{% static 'img/da-ben.jpg' %}" alt="Image Description" class="img-fluid round-c-2btns animate__animated"> 
       </div>
     </div>
     <hr style="color:white">
