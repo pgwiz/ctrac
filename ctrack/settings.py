@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-4y=sydmh)kb#lqyanw-x36prbj)(($a)zhpuk(%dym=1njd83-
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*.popox.online',
+    'ctr.popox.online',
     '80.93.187.96',
     '127.0.0.1',
     'localhost',
