@@ -103,7 +103,7 @@ WSGI_APPLICATION = 'ctrack.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+'''
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.sqlite3',
@@ -111,13 +111,14 @@ DATABASES = {
          #'NAME': BASE_DIR / 'db.sqlite3',
      }
  }
+ '''
 #brinpeter6-db-server
 #dbos_user
 #MC45MzUxNDIyOTAzNzAyODc3
 # settings.py
 
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -132,7 +133,6 @@ DATABASES = {
         }
     }
 }
-'''
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
