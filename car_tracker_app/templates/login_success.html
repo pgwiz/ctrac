@@ -1,0 +1,6 @@
+<p>Welcome, {{ user.username }}!</p>
+<p>Role: 
+  {% for group in user.groups.all %}
+    {{ group.name }} 
+  {% endfor %}
+</p>

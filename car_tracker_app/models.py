@@ -5,7 +5,22 @@ from django.db import models
 #    phone_no = models.CharField(max_length=20)
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
+from django.contrib.auth.models import Group
 
+from django.contrib.auth.models import Group
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
+
+@receiver(post_migrate)
+def create_groups(sender, **kwargs):
+    Group.objects.get_or_create(name='Super Admin')
+    Group.objects.get_or_create(name='Admin')
+    Group.objects.get_or_create(name='Editor')
+    Group.objects.get_or_create(name='Normal User')
+
+    
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_no = models.CharField(max_length=20)

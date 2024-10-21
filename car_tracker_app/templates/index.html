@@ -30,7 +30,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Track</a>
+                <a class="nav-link" href="{% url 'track' %}">Track</a>
               </li>
               <li class="nav-item"></li>
                 <a class="nav-link" href="#">Details</a>
@@ -39,16 +39,19 @@
                 <a class="nav-link" href="#">Logs</a>
               </li>
               <li class="nav-item"></li>
-                <a class="nav-link" href="#">Appraise</a>
+                <a class="nav-link" href="{% url 'register_vehicle' %}">Appraise</a>
               </li>
               <li class="nav-item"></li>
                 <a class="nav-link" href="#">About Us</a>
               </li>
+              <li class="nav-item"></li>
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
               
-                <form class="d-flex">
+                <!--form class="d-flex">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </form-->
             
             </ul>
             
@@ -58,7 +61,12 @@
       <hr style="color:white">
 
     <div class="bodyCo">
-   
+      {% if user.is_authenticated %}
+      <p>Welcome, {{ user.username }}!</p>
+      {% if user.groups.all %}
+          <p>Role: {% for group in user.groups.all %}{{ group.name }} {% endfor %}</p>
+      {% endif %}
+  {% endif %}
 
     <header class="header">
     <div class="container ">

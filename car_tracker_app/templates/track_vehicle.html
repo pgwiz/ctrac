@@ -5,24 +5,53 @@
 
 <div class="container mt-5">
   <h2>Track Vehicle</h2>
-  <div id="map" style="height: 400px;"></div>
-
+  
+  <!-- Map container -->
+  <div id="map" style="height: 400px; width: 100%; margin: 20px auto; border: 2px solid #ddd; border-radius: 10px;"></div>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    /* Styling for the map container */
+    #map {
+      height: 400px;
+      width: 100%;
+      margin: 20px auto;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      color: #ddd;
+    }
+  </style>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // Initialize the map (replace with your actual map initialization code)
-    var map = L.map('map').setView([0, 0], 13); // Initial view centered at [0, 0]
+    // Initialize the map with an initial center at [0, 0] and zoom level 2
+    var map = L.map('map').setView([0, 0], 2);
 
+    // Add a tile layer (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Fetch vehicle location data (replace with your actual API call)
-    fetch('/api/vehicle_location/{{ vehicle_id }}/')
-      .then(response => response.json())
-      .then(locationData => {
-        // Add a marker for the vehicle's location
-        var marker = L.marker([locationData.latitude, locationData.longitude]).addTo(map);
-        marker.bindPopup("<b>" + locationData.vehicle_name + "</b>").openPopup();
-      });
+    // Check if geolocation is supported and get the user's current position
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+
+    // Function to display the user's current position
+    function showPosition(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+      // Center the map on the user's location and zoom in
+      map.setView([latitude, longitude], 14);
+
+      // Add a marker at the user's current location
+      var marker = L.marker([latitude, longitude]).addTo(map);
+      marker.bindPopup("<b>You are here!</b>").openPopup();
+    }
   </script>
 </div>
 
