@@ -18,6 +18,8 @@ urlpatterns = [
     path('api/vehicle/<int:vehicle_id>/', views.vehicle_detail, name='vehicle_detail'),
     path('track_vehicle/<int:vehicle_id>/', views.track_vehicle, name='track_vehicle'),
     path('register/', views.register_view, name='register'),
+    path('vehicle_logs/', views.vehicle_logs, name='vehicle_logs'),  # For POST requests
+    path('vehicle_logs/<int:vehicle_id>/', views.display_vehicle_logs, name='display_vehicle_logs'),  # For GET requests
 
     #managing users
     path('edit_user/<int:pk>/', views.edit_user_view, name='edit_user'),

@@ -7,7 +7,9 @@
   <h2>Track Vehicle</h2>
   
   <!-- Map container -->
-  <div id="map" style="height: 400px; width: 100%; margin: 20px auto; border: 2px solid #ddd; border-radius: 10px;"></div>
+  <div id="map"></div>
+
+  <!-- Load Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     /* Styling for the map container */
@@ -18,11 +20,14 @@
       border: 2px solid #ddd;
       border-radius: 10px;
     }
+
     body {
       font-family: Arial, sans-serif;
-      color: #ddd;
+      color: #333; /* Changed to a darker color for better readability */
     }
   </style>
+
+  <!-- Load Leaflet JavaScript -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Initialize the map with an initial center at [0, 0] and zoom level 2
@@ -35,12 +40,12 @@
 
     // Check if geolocation is supported and get the user's current position
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
       alert("Geolocation is not supported by this browser.");
     }
 
-    // Function to display the user's current position
+    // Function to display the user's current position and send data
     function showPosition(position) {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
@@ -51,8 +56,61 @@
       // Add a marker at the user's current location
       var marker = L.marker([latitude, longitude]).addTo(map);
       marker.bindPopup("<b>You are here!</b>").openPopup();
+
+      // Prepare data to send to the server
+      var user = "{{ request.user.username }}";  // Ensure you pass the username from Django context
+      var vehicleId = "{{ vehicle.id }}";  // Ensure you have the vehicle ID available
+
+      var data = {
+        user: user,
+        vehicle_id: vehicleId,
+        latitude: latitude,
+        longitude: longitude
+      };
+
+      // Send data to the server
+      fetch('/vehicle_logs/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token if you have CSRF protection enabled
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        // Handle different response statuses
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(result => {
+        console.log(result); // Log success or handle response
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    }
+
+    // Function to handle errors when fetching geolocation
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
+      }
     }
   </script>
+
 </div>
 
 {% endblock content %}

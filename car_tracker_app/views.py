@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Vehicle, UserProfile
+from .models import Vehicle, UserProfile, VehicleLog
 from .forms import VehicleRegistrationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
@@ -10,6 +10,12 @@ from .forms import RegistrationForm, UserForm
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.urls import reverse_lazy  # Import reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.views.decorators.csrf import csrf_exempt
+import json
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def is_admin_or_superadmin(user):
@@ -78,7 +84,6 @@ def register_vehicle(request):
         if form.is_valid():
             vehicle = form.save(commit=False)  # Don't save yet
             vehicle.owner_name = request.user.get_full_name() 
-            
             # Get or create the UserProfile for the current user
             user_profile, created = UserProfile.objects.get_or_create(user=request.user)
             
@@ -116,6 +121,50 @@ def track_vehicle(request, vehicle_id):
     }
     # ... your logic for the track_vehicle page (e.g., fetching and displaying vehicle data)
     return render(request, 'track_vehicle.html', {'vehicle': vehicle})
+
+@csrf_exempt
+def vehicle_logs(request):
+    logger.info(f"Received {request.method} request")
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            user = data.get('user')
+            vehicle_id = data.get('vehicle_id')
+            lat = data.get('latitude')
+            lon = data.get('longitude')
+
+            if not all([user, vehicle_id, lat, lon]):
+                return JsonResponse({'error': 'Missing required fields'}, status=400)
+
+            # Validate latitude and longitude types
+            lat = float(lat)
+            lon = float(lon)
+
+            # Get the vehicle object
+            vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+
+            # Save the log entry in the database
+            VehicleLog.objects.create(user=user, vehicle=vehicle, latitude=lat, longitude=lon)
+
+            return JsonResponse({'status': 'success'}, status=201)
+        except ValueError as ve:
+            return JsonResponse({'error': f'Invalid value: {str(ve)}'}, status=400)
+        except Exception as e:
+            logger.error(f"Error saving vehicle log: {e}")
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        logger.warning("Invalid request method")
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+def display_vehicle_logs(request, vehicle_id):
+    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+    vehicle_logs = VehicleLog.objects.filter(vehicle=vehicle).order_by('-timestamp')
+
+    context = {
+        'vehicle': vehicle,
+        'vehicle_logs': vehicle_logs,
+    }
+    return render(request, 'vehicle_logs.html', context)
 
 #def login(request):
 #    return render(request, 'lr.html')

@@ -36,3 +36,13 @@ class Vehicle(models.Model):
     owner_name = models.CharField(max_length=255, default='Peter Gwadenya')  # Add owner_name field
     phone_no = models.CharField(max_length=20, default='254111791418')  # Add phone_no field
     licence_no = models.CharField(max_length=50, default='DRV-K204')  # Set default to an empty string
+
+class VehicleLog(models.Model):
+    user = models.CharField(max_length=100)  # Assuming username is stored
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} logged {self.vehicle.license_plate} at {self.latitude}, {self.longitude} on {self.timestamp}"

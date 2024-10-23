@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Vehicle Logs for {{ vehicle.license_plate }}</h2>
+  
+  <!-- Table to display vehicle logs -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in vehicle_logs %}
+      <tr>
+        <td>{{ log.user }}</td>
+        <td>{{ log.latitude }}</td>
+        <td>{{ log.longitude }}</td>
+        <td>{{ log.timestamp|date:"Y-m-d H:i:s" }}</td>  <!-- Format timestamp -->
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center">No logs available for this vehicle.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Button to refresh the logs -->
+  <button id="refresh-logs" class="btn btn-primary mt-3">Refresh Logs</button>
+</div>
+
+<script>
+  // Optional: Function to refresh the logs via AJAX if needed
+  document.getElementById('refresh-logs').addEventListener('click', function() {
+    fetch('/api/vehicle_logs/{{ vehicle.id }}/')
+      .then(response => response.json())
+      .then(data => {
+        // Clear existing logs
+        const tableBody = document.querySelector('tbody');
+        tableBody.innerHTML = '';
+
+        // Populate with new logs
+        if (data.logs.length > 0) {
+          data.logs.forEach(log => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${log.user}</td>
+              <td>${log.latitude}</td>
+              <td>${log.longitude}</td>
+              <td>${new Date(log.timestamp).toLocaleString()}</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        } else {
+          const row = document.createElement('tr');
+          row.innerHTML = '<td colspan="4" class="text-center">No logs available for this vehicle.</td>';
+          tableBody.appendChild(row);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching logs:', error);
+      });
+  });
+</script>
+
+{% endblock content %}
