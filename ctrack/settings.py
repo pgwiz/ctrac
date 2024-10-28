@@ -27,6 +27,8 @@ SECRET_KEY = 'django-insecure-4y=sydmh)kb#lqyanw-x36prbj)(($a)zhpuk(%dym=1njd83-
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'www.r-ctr.popox.online',
+    'r-ctr.popox.online',
     'www.ctr.popox.online',
     'ctr.popox.online',
     '80.93.187.96',
@@ -45,6 +47,10 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 1209600  # 2 weeks, for example
 LOGIN_REDIRECT_URL = 'index'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'car_tracker_app', 'media')
 MEDIA_URL = '/media/'
